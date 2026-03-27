@@ -48,7 +48,7 @@ class City:
 
     def updateResources(self):
         for workplace in self.workplaces:
-            workplace.updateResources()
+            workplace.produceResource()
 
     def spawnCity(self, startPopulation: int):
         for i in range(startPopulation // 2):
@@ -57,6 +57,7 @@ class City:
 
         for i in range(startPopulation):
             human = Human(15, city = self)
+            self.population.append(human)
         self.workplaces.append(Workplace(2, EResources.FOOD, self))
         self.workplaces.append(Workplace(2, EResources.BRESOURCES, self))
 

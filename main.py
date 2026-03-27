@@ -1,16 +1,18 @@
-# This is a sample Python script.
+from civsim.GameMaster import GameMaster
+import streamlit as st
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    gm = GameMaster()
+    if "gm" not in st.session_state:
+        st.session_state.gm = GameMaster()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    with st.sidebar:
+        st.text("Create new simulation")
+        setup = st.columns(2)
+        setup[0].subheader("Number of starting cities")
+        numOfStartCities = st.number_input("Start cities", min_value=1, max_value=10, value=1)
+        if st.button("Start simulation"):
+            st.session_state.gm.startSimulation(numOfStartCities)
+        if st.button("Show simulation"):
+            st.session_state.gm.af()
+        st.text(st.session_state.gm.a)
