@@ -14,7 +14,4 @@ class Workplace:
         self.city = city
 
     def produceResource(self):
-        if self.resource == EResources.FOOD:
-            self.city.storage["Food"] += len(self.workforce) * self.ratio
-        if self.resource == EResources.BRESOURCES:
-            self.city.storage["BResources"] += len(self.workforce) * self.ratio
+        self.city.storage[self.resource] += len(self.workforce) * self.ratio
