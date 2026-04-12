@@ -1,14 +1,14 @@
 from typing import TYPE_CHECKING
 from civsim.City.Workplace.EResources import EResources
-from civsim.EConfig import EConfig
+from civsim.Config import Config
 
 if TYPE_CHECKING:
     from civsim.City.City import City
 
 class Workplace:
-    def __init__(self, capacity: int, resource: EResources, city: City):
-        self.ratio = EConfig.PRODURATIO.value
-        self.capacity = capacity
+    def __init__(self, resource: EResources, city: City):
+        self.ratio = Config.PROD_RATIO.value
+        self.capacity = Config.WORKPLACE_MAX_RESIDENTS.value
         self.workforce = []
         self.resource = resource
         self.city = city

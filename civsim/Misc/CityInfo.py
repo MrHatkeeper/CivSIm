@@ -1,7 +1,7 @@
 from numpy.f2py.auxfuncs import throw_error
 
 from civsim.City.City import City
-from civsim.EConfig import EConfig
+from civsim.Config import Config
 
 
 def getAdults(city: City):
@@ -79,5 +79,5 @@ def getProduction(city: City):
     return out
 
 def getConsumption(city: City):
-    return EConfig.HUNGERRATE.value * len(city.population)
+    return Config.HUNGER_RATE.value * len(city.population)
 

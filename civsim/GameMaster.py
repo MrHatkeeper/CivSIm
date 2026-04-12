@@ -13,7 +13,7 @@ class GameMaster:
         self.isRunning = True
         self.year = 0
         for i in range(numOfStartingCities):
-            city = City(i, 4, self.year)
+            city = City(i, 4, self)
             self.cities.append(city)
 
     def moveOneYear(self):
