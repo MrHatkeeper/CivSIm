@@ -10,16 +10,17 @@ def evalScore(cityState):
 
     if population == 0:
         return 0
-    avg_hunger = Metrics.getAverage("hunger", cityState)
-    avg_happiness = Metrics.getAverage("happiness", cityState)
+    
+    avgHunger = Metrics.getAverage("hunger", cityState)
+    avgHappiness = Metrics.getAverage("happiness", cityState)
 
-    homeless_ratio = PopInfo.numOfHomeless(cityState) / population
-    free_housing_ratio = EconInfo.numOfFreeLivingSpaces(cityState) / population
+    homelessRatio = PopInfo.numOfHomeless(cityState) / population
+    freeHousingRatio = EconInfo.numOfFreeLivingSpaces(cityState) / population
 
-    hungerScore = -avg_hunger * Config.AVG_HUNGER_MULT.value
-    happinessScore = avg_happiness * Config.AVG_HAPPINESS_MULT.value
-    homelessScore = -homeless_ratio * Config.HOMELESS_MULT.value
-    housingScore = free_housing_ratio * Config.FREE_HOUSING_SPACE_MULT.value
+    hungerScore = -avgHunger * Config.AVG_HUNGER_MULT.value
+    happinessScore = avgHappiness * Config.AVG_HAPPINESS_MULT.value
+    homelessScore = -homelessRatio * Config.HOMELESS_MULT.value
+    housingScore = freeHousingRatio * Config.FREE_HOUSING_SPACE_MULT.value
 
     return hungerScore + happinessScore + homelessScore + housingScore
 

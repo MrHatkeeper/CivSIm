@@ -28,6 +28,8 @@ def getProduction(city: City):
         if workplace.resource not in out:
             out[workplace.resource] = 0
         out[workplace.resource] += len(workplace.workforce) * workplace.ratio
+    if len(out) == 0:
+        raise Exception("No resources available")
     return out
 
 def getConsumption(city: City):
