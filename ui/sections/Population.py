@@ -8,3 +8,4 @@ def renderPopulation(city):
     st.write(f"Adults: {len(CityInfo.getAdults(city))}")
     st.write(f"Children: {len(CityInfo.getChildren(city))}")
     st.write(f"Unemployed: {len(CityInfo.getUnemployed(city))}")
+    st.write(f"Homeless: {CityInfo.numOfHomeless(city)}")

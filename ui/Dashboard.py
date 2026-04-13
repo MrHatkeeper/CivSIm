@@ -28,7 +28,7 @@ def renderDashboard(gm):
     city = optionMan[st.session_state.selected_city]
 
     st.title(f"City: {city.name}")
-
+    st.subheader(f"Mayor's last action: {city.mayor.lastAction}")
     renderPopulation(city)
     renderHousing(city)
     renderHappiness(city)
