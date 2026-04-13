@@ -13,11 +13,15 @@ def renderDashboard(gm):
     if "selected_city" not in st.session_state:
         st.session_state.selected_city = None
 
+
+    if len(optionMan) == 0:
+        return
+
     selection = st.pills(
         "Select city:",
         options = optionMan.keys(),
         selection_mode = "single",
-        default = st.session_state.selected_city
+        default = list(optionMan.keys())[0],
     )
 
     if selection is None:
