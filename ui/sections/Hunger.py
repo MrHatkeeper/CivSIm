@@ -1,9 +1,11 @@
 import streamlit as st
-from civsim.Misc import CityInfo
+from civsim.Misc import Metrics, EconInfo
+
 
 def renderHunger(city):
     st.subheader("Hunger")
+    st.write(f"Food consumption per year: {EconInfo.getConsumption(city)}")
 
-    st.write(f"Average: {CityInfo.getAverage('hunger', city)}")
-    st.write(f"Lowest: {CityInfo.getLowest('hunger', city)}")
-    st.write(f"Highest: {CityInfo.getHighest('hunger', city)}")
+    st.write(f"Average: {Metrics.getAverage('hunger', city)}")
+    st.write(f"Lowest: {Metrics.getLowest('hunger', city)}")
+    st.write(f"Highest: {Metrics.getHighest('hunger', city)}")

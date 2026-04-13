@@ -1,3 +1,6 @@
+from civsim.Misc import PopInfo
+
+
 class WorkSystem:
     def __init__(self, city):
         self.city = city
@@ -7,8 +10,7 @@ class WorkSystem:
         self.updateResources()
 
     def assignWorkplace(self):
-        from civsim.Misc import CityInfo
-        unemployed = CityInfo.getUnemployed(self.city)
+        unemployed = PopInfo.getUnemployed(self.city)
         for workplace in self.city.workplaces:
             if len(unemployed) == 0:
                 break

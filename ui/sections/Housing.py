@@ -1,12 +1,12 @@
 import streamlit as st
-from civsim.Misc import CityInfo
+
+from civsim.City.Workplace.EResources import EResources
+from civsim.Misc import EconInfo
+
 
 def renderHousing(city):
     st.subheader("Housing")
 
-    st.write(f"Houses: {len(city.houses)}")
-    st.write(f"Free spaces: {CityInfo.numOfFreeLivingSpaces(city)}")
-    st.write(f"Occupied spaces: {CityInfo.numOfOccupiedLivingSpaces(city)}")
 
     data = {
         "Type":[
@@ -15,12 +15,16 @@ def renderHousing(city):
             "Brick house"
         ],
         "Occupied spaces": [
-            CityInfo.numOfOccupiedLivingSpaces(city),
-
-        ]
+            EconInfo.numOfOccupiedLivingSpaces(city),
+            EconInfo.numOfOccupiedWorkPlaces(city, EResources.FOOD),
+            EconInfo.numOfOccupiedWorkPlaces(city, EResources.BRICKS)
+        ],
 
         "Free spaces": [
-            CityInfo.numOfFreeLivingSpaces(city),
+            EconInfo.numOfFreeLivingSpaces(city),
+            EconInfo.numOfOccupiedWorkPlaces(city, EResources.FOOD),
+            EconInfo.numOfOccupiedWorkPlaces(city, EResources.BRICKS)
         ]
-
     }
+
+    st.table(data)

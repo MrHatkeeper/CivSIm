@@ -22,7 +22,9 @@ class BuildSystem:
         raise TypeError("Invalid Build Type")
 
     def buildHouse(self):
+        self.city.storage[EResources.BRICKS] -= Config.HOUSE_COST.value
         self.city.houses.append(House())
 
     def buildWorkplace(self, resource: EResources):
+        self.city.storage[EResources.BRICKS] -= Config.WORKPLACE_COST.value
         self.city.workplaces.append(Workplace(resource, self.city))

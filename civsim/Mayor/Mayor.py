@@ -2,18 +2,19 @@ from copy import deepcopy
 
 from civsim.City.Workplace.EResources import EResources
 from civsim.Config import Config
-from civsim.Misc import CityInfo
+from civsim.Misc import EconInfo, Metrics, PopInfo
+
 
 def evalScore(cityState):
     population = len(cityState.population)
 
     if population == 0:
         return 0
-    avg_hunger = CityInfo.getAverage("hunger", cityState)
-    avg_happiness = CityInfo.getAverage("happiness", cityState)
+    avg_hunger = Metrics.getAverage("hunger", cityState)
+    avg_happiness = Metrics.getAverage("happiness", cityState)
 
-    homeless_ratio = CityInfo.numOfHomeless(cityState) / population
-    free_housing_ratio = CityInfo.numOfFreeLivingSpaces(cityState) / population
+    homeless_ratio = PopInfo.numOfHomeless(cityState) / population
+    free_housing_ratio = EconInfo.numOfFreeLivingSpaces(cityState) / population
 
     hungerScore = -avg_hunger * Config.AVG_HUNGER_MULT.value
     happinessScore = avg_happiness * Config.AVG_HAPPINESS_MULT.value
@@ -39,14 +40,20 @@ class Mayor:
     def __init__(self, city):
         self.city = city
         self.lastAction = "nothing"
+        self.actionValues = {
+            "nothing" : 0,
+            "buildHouse" : 0,
+            "buildFarm" : 0,
+            "buildBrickHouse" : 0,
+        }
 
     def decision(self):
-        actions = ["nothing", "buildHouse", "buildFarm", "buildBrickHouse"]
         startState = deepcopy(self.city)
 
-        bestAction = actions[0]
+        bestAction = list(self.actionValues.keys())[0]
         bestValue = evalScore(startState)
-        for action in actions:
+
+        for action in self.actionValues.keys():
             simulatedCity = deepcopy(self.city)
             makeAction(action, simulatedCity)
 
@@ -54,6 +61,7 @@ class Mayor:
                 simulatedCity.updateCity()
 
             evalValue = evalScore(simulatedCity)
+            self.actionValues[action] = evalValue
             if evalValue > bestValue:
                 bestAction = action
                 bestValue = evalValue

@@ -4,7 +4,7 @@ from civsim.City.Workplace.EResources import EResources
 from civsim.GameMaster import GameMaster
 import streamlit as st
 
-from civsim.Misc import CityInfo
+from civsim.Misc import EconInfo
 from ui.Dashboard import renderDashboard
 from ui.SideBar import SideBar
 

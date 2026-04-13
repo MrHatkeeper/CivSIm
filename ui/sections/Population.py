@@ -1,11 +1,12 @@
 import streamlit as st
-from civsim.Misc import CityInfo
+from civsim.Misc import PopInfo
+
 
 def renderPopulation(city):
-    st.subheader("Population")
+    st.subheader("Quantity")
 
     st.write(f"Total: {len(city.population)}")
-    st.write(f"Adults: {len(CityInfo.getAdults(city))}")
-    st.write(f"Children: {len(CityInfo.getChildren(city))}")
-    st.write(f"Unemployed: {len(CityInfo.getUnemployed(city))}")
-    st.write(f"Homeless: {CityInfo.numOfHomeless(city)}")
+    st.write(f"Adults: {len(PopInfo.getAdults(city))}")
+    st.write(f"Children: {len(PopInfo.getChildren(city))}")
+    st.write(f"Unemployed: {len(PopInfo.getUnemployed(city))}")
+    st.write(f"Homeless: {PopInfo.numOfHomeless(city)}")

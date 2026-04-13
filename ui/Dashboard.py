@@ -4,7 +4,8 @@ from ui.sections.Population import renderPopulation
 from ui.sections.Housing import renderHousing
 from ui.sections.Happiness import renderHappiness
 from ui.sections.Hunger import renderHunger
-from ui.sections.Economy import renderEconomy
+from ui.sections.Economy import renderResources
+from ui.sections.MayorVal import renderMayor
 
 
 def renderDashboard(gm):
@@ -28,9 +29,16 @@ def renderDashboard(gm):
     city = optionMan[st.session_state.selected_city]
 
     st.title(f"City: {city.name}")
-    st.subheader(f"Mayor's last action: {city.mayor.lastAction}")
-    renderPopulation(city)
+
+    renderMayor(city)
+    st.write("# Population")
+    col1, col2, col3 = st.columns(3, border=True)
+    with col1:
+        renderPopulation(city)
+    with col2:
+        renderHappiness(city)
+    with col3:
+        renderHunger(city)
+    st.write("# Economy")
     renderHousing(city)
-    renderHappiness(city)
-    renderHunger(city)
-    renderEconomy(city)
+    renderResources(city)
