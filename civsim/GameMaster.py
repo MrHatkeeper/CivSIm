@@ -8,8 +8,14 @@ class GameMaster:
         self.year = 0
         self.isRunning = False
         self.mayors = []
+        self.speed = 1
+        self.speedMultiplier = 1
 
     def startSimulation(self, numOfStartingCities):
+        """
+        Funkce nastaví základní stav simulace.
+        :param numOfStartingCities: počet měst na začátku.
+        """
         del self.cities[:]
         self.cities = []
         self.isRunning = True
@@ -22,6 +28,19 @@ class GameMaster:
             self.cities.append(city)
 
     def moveOneYear(self):
+        """
+        Funkce posune simulaci o rok dopředu.
+        :return:
+        """
         self.year += 1
         for mayor in self.mayors:
-            mayor.decision()
+            if len(mayor.city.population) != 0:
+                mayor.decision()
+
+
+    def getSpeed(self):
+        """
+        Funkce vypočítá rychlost běhu simulace
+        :return: rychlost běhu
+        """
+        return 1/self.speedMultiplier**2 * self.speed

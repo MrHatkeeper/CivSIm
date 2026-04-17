@@ -4,6 +4,12 @@ if TYPE_CHECKING:
     from civsim.City.City import City
 
 def getAverage(value: str, city: City):
+    """
+    Pomocná metoda vrátí průměrnou hodnotu z města.
+    :param value: hledaná hodnota
+    :param city: město, ve kterém metoda hledá.
+    :return: průměr hodnotu
+    """
     out = 0
     if value == 'happiness':
         for human in city.population:
@@ -16,6 +22,12 @@ def getAverage(value: str, city: City):
     return round(out / len(city.population),2)
 
 def getHighest(value: str, city: City):
+    """
+    Pomocná metoda vrátí nejvyšší hodnotu z města.
+    :param value: hledaná hodnota
+    :param city: město, ve kterém metoda hledá.
+    :return: nejvyšší hodnotu
+    """
     out = 0
     if value == 'happiness':
         for human in city.population:
@@ -30,6 +42,12 @@ def getHighest(value: str, city: City):
     return out
 
 def getLowest(value: str, city: City):
+    """
+    Pomocná metoda vrátí nejnižší hodnotu z města.
+    :param value: hledaná hodnota
+    :param city: město, ve kterém metoda hledá.
+    :return: nejnižší hodnotu
+    """
     out = 0
     if value == 'happiness':
         out = city.population[0].happiness

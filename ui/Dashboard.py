@@ -34,6 +34,10 @@ def renderDashboard(gm):
 
     st.title(f"City: {city.name}")
 
+    if len(city.population) == 0:
+        st.write(f"# City disappeared on year {city.year}")
+        return
+
     renderMayor(city)
     st.write("# Population")
     col1, col2, col3 = st.columns(3, border=True)

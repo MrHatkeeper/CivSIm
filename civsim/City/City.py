@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 class City:
     def __init__(self, numOfCity: int, startPopulation: int, gm: GameMaster, mayor: Mayor = None):
-        self.name = f"District {numOfCity}"
+        self.name = f"City {numOfCity}"
         self.houses = []
         self.population = []
         self.workplaces = []
@@ -30,6 +30,10 @@ class City:
         self.spawnCity(startPopulation)
 
     def spawnCity(self, startPopulation: int):
+        """
+        Nastaví městu výchozí stav.
+        :param startPopulation: počet počátečních lidí
+        """
         for i in range(startPopulation // 2):
             house = House()
             self.houses.append(house)
@@ -46,6 +50,9 @@ class City:
         self.workplaceSystem.assignWorkplace()
 
     def updateCity(self):
+        """
+        Funkce zavolá všechny pomocné systémy na aktualizaci města.
+        """
         self.year += 1
         self.populationSystem.updatePopulation()
         self.housingSystem.accommodatePeople()

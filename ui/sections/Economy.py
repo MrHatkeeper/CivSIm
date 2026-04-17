@@ -17,8 +17,8 @@ def renderResources(city):
             production[EResources.BRICKS]
         ],
         "In storage":[
-            city.storage[EResources.FOOD],
-            city.storage[EResources.BRICKS],
+            round(city.storage[EResources.FOOD],1),
+            round(city.storage[EResources.BRICKS],1),
         ]
     }
 

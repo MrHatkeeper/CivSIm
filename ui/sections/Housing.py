@@ -14,6 +14,11 @@ def renderHousing(city):
             "Farm",
             "Brick house"
         ],
+        "Number of places": [
+            EconInfo.numOfHouses(city),
+            EconInfo.numOfWorkplaces(city, EResources.FOOD),
+            EconInfo.numOfWorkplaces(city, EResources.BRICKS)
+        ],
         "Occupied spaces": [
             EconInfo.numOfOccupiedLivingSpaces(city),
             EconInfo.numOfOccupiedWorkPlaces(city, EResources.FOOD),

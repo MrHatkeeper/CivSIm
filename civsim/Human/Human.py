@@ -1,5 +1,4 @@
 import random
-import math
 from typing import TYPE_CHECKING
 
 from civsim.Config import Config
@@ -9,7 +8,6 @@ if TYPE_CHECKING:
 
 class Human:
     def __init__(self, startAge: int = 0, city: City = None, birthYear: int = None):
-        self.name = self.generateName()
         self.age = startAge
         self.hungerRate = Config.HUNGER_RATE.value
         self.happiness = 100
@@ -21,6 +19,9 @@ class Human:
         self.birthDate = birthYear
 
     def updateHuman(self):
+        """
+        Zestárne člověka, přidá mu hlad, zjistí, jak moc je šťastný a popřípadě ho přidá do seznamu lidí na zabití.
+        """
         self.age = self.city.year - self.birthDate
         if self.age >= Config.ADULT_AGE.value:
             self.isAdult = True
@@ -29,6 +30,9 @@ class Human:
         self.killHuman()
 
     def killHuman(self):
+        """
+        Zjistí, zda člověk má umřít
+        """
         #TODO: make more complex
         if self.happiness < Config.DEATH_BORDER.value:
             rand = random.randrange(1,100)
@@ -36,6 +40,9 @@ class Human:
                 self.city.peopleToKill.append(self)
 
     def evalHappiness(self):
+        """
+        Aktualizuje happiness podle momentálního stavu člověka.
+        """
         if self.house is None:
             self.happiness -= Config.IS_HOUSED_INC.value
         else:
@@ -46,6 +53,9 @@ class Human:
             self.happiness = 100
 
     def reproduce(self):
+        """
+         Funkce vyhodnotí, zda se člověk má rozmnožit, popřípadě vytvoří dítě.
+        """
         if not self.isAdult:
             return
         partner = None
@@ -81,11 +91,4 @@ class Human:
             if self. house is not None and len(self.house.residents) < self.house.capacity:
                 baby.house = self.house
                 self.house.residents.append(baby)
-
-
             self.city.population.append(baby)
-
-
-    #TODO:
-    def generateName(self) -> str:
-        return "A"

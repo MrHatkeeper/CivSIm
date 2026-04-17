@@ -11,17 +11,23 @@ class PopulationSystem:
         self.city = city
 
     def updatePopulation(self):
-        self.updatePerson()
+        """
+        Aktualizuje stav populace.
+        """
+        for human in self.city.population:
+            human.updateHuman()
+
         self.killPeople()
+
         for human in self.city.population:
             human.reproduce()
 
-    def updatePerson(self):
-        for human in self.city.population:
-            human.updateHuman()
         self.feedPopulation()
 
     def feedPopulation(self):
+        """
+        Rozdělí, kolik kdo z populace dostane najíst.
+        """
         random.shuffle(self.city.population)
         for human in self.city.population:
             if self.city.storage[EResources.FOOD] <= 0:
@@ -32,6 +38,9 @@ class PopulationSystem:
             self.city.storage[EResources.FOOD] -= given
 
     def killPeople(self):
+        """
+        Smaže Human(). kteří splňují podmínky na umření.
+        """
         for human in self.city.peopleToKill:
             if human.house is not None and human in human.house.residents:
                 human.house.residents.remove(human)

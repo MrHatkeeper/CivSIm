@@ -1,4 +1,9 @@
 def accommodateHuman(human, house):
+    """
+    Pomoconá funkce pro přiřazení domu člověku.
+    :param human: Human()
+    :param house: House()
+    """
     human.house = house
     house.residents.append(human)
 
@@ -7,6 +12,9 @@ class HousingSystem:
         self.city = city
 
     def accommodatePeople(self):
+        """
+        Funkce přiřadí všem bezdomovcům dům, pokud jsou nějaké volné pokoje.
+        """
         emptyHouses = [h for h in self.city.houses if len(h.residents) < h.capacity]
         houseIndex = 0
         for human in self.city.population:

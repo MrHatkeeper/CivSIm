@@ -14,4 +14,7 @@ class Workplace:
         self.city = city
 
     def produceResource(self):
+        """
+        Funkce vyprodukuje svojí surovinu a přidá ji do skladu
+        """
         self.city.storage[self.resource] += len(self.workforce) * self.ratio

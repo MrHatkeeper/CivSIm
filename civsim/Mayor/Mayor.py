@@ -4,13 +4,18 @@ from civsim.City.Workplace.EResources import EResources
 from civsim.Config import Config
 from civsim.Misc import EconInfo, Metrics, PopInfo
 
-
 def evalScore(cityState):
+    """
+    Metoda Vyhodnocuje stav města.
+
+    :param cityState: City()
+    :return: int
+    """
     population = len(cityState.population)
 
     if population == 0:
         return 0
-    
+
     avgHunger = Metrics.getAverage("hunger", cityState)
     avgHappiness = Metrics.getAverage("happiness", cityState)
 
@@ -25,7 +30,13 @@ def evalScore(cityState):
     return hungerScore + happinessScore + homelessScore + housingScore
 
 
+
 def makeAction(action, cityState):
+    """
+    Metoda postaví budovu v cityState.
+    :param action: str
+    :param cityState: City()
+    """
     if action == "buildHouse":
         if cityState.buildSystem.canBuild("house"):
             cityState.buildSystem.buildHouse()
@@ -49,6 +60,9 @@ class Mayor:
         }
 
     def decision(self):
+        """
+        Funkce vyzkouší možné stavy, jak jaká akce ovlivní mésto. Následně vybere a udělá tu nejlepší.
+        """
         startState = deepcopy(self.city)
 
         bestAction = list(self.actionValues.keys())[0]
@@ -67,7 +81,7 @@ class Mayor:
                 bestAction = action
                 bestValue = evalValue
 
-        makeAction(bestAction, startState)
+        makeAction(bestAction, self.city)
         self.city.updateCity()
         self.lastAction = bestAction
 

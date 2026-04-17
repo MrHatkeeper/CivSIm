@@ -1,6 +1,10 @@
 from enum import Enum
 class Config(Enum):
     """
+    Soubor s fixními hodnotami.
+    """
+
+    """
     Human config
     """
     HUNGER_RATE = 2
@@ -14,7 +18,7 @@ class Config(Enum):
     """
     Workplace config
     """
-    PROD_RATIO = 10
+    PROD_RATIO = 5
 
     """
     Building config
