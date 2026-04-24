@@ -13,6 +13,7 @@ from civsim.Mayor.Mayor import Mayor
 if TYPE_CHECKING:
     from civsim.GameMaster import GameMaster
 
+
 class City:
     def __init__(self, numOfCity: int, startPopulation: int, gm: GameMaster, mayor: Mayor = None):
         self.name = f"City {numOfCity}"
@@ -39,7 +40,7 @@ class City:
             self.houses.append(house)
 
         for i in range(startPopulation):
-            human = Human(15, city = self, birthYear = self.year)
+            human = Human(15, city=self, birthYear=self.year)
             human.isAdult = True
             self.population.append(human)
 
@@ -57,4 +58,3 @@ class City:
         self.populationSystem.updatePopulation()
         self.housingSystem.accommodatePeople()
         self.workplaceSystem.updateWork()
-

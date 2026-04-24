@@ -1,11 +1,11 @@
 from typing import TYPE_CHECKING
 
-
 from civsim.City.Workplace.EResources import EResources
 from civsim.Config import Config
 
 if TYPE_CHECKING:
     from civsim.City.City import City
+
 
 def numOfWorkplaces(city: City, prodType: EResources):
     """
@@ -20,6 +20,7 @@ def numOfWorkplaces(city: City, prodType: EResources):
             out += 1
     return out
 
+
 def numOfOccupiedWorkPlaces(city: City, prodType: EResources):
     """
     Pomocná metoda pro získání obsazených pracovních míst jedné suroviny.
@@ -32,6 +33,7 @@ def numOfOccupiedWorkPlaces(city: City, prodType: EResources):
         if workplace.resource == prodType:
             out += len(workplace.workforce)
     return out
+
 
 def numOfFreeWorkPlaces(city: City, prodType: EResources):
     """
@@ -46,6 +48,7 @@ def numOfFreeWorkPlaces(city: City, prodType: EResources):
             out += Config.WORKPLACE_MAX_RESIDENTS.value - len(workplace.workforce)
     return out
 
+
 def getProduction(city: City):
     """
     Pomocná funkce pro spočítání celkové produkce jednoho města všech surovin.
@@ -58,6 +61,7 @@ def getProduction(city: City):
             out[workplace.resource] = 0
         out[workplace.resource] += len(workplace.workforce) * workplace.ratio
     return out
+
 
 def getConsumption(city: City):
     """
@@ -76,6 +80,7 @@ def numOfHouses(city: City):
     """
     return len(city.houses)
 
+
 def numOfFreeLivingSpaces(city: City):
     """
     Pomocná metoda vracející počet volných míst k bydlení v jednom městě.
@@ -87,6 +92,7 @@ def numOfFreeLivingSpaces(city: City):
         out += house.capacity - len(house.residents)
     return out
 
+
 def numOfOccupiedLivingSpaces(city: City):
     """
     Pomocná funkce vracející počet obsazených míst k bydlení v jednom městě.
@@ -97,3 +103,13 @@ def numOfOccupiedLivingSpaces(city: City):
     for house in city.houses:
         out += len(house.residents)
     return out
+
+
+def costToBuild(city: City, buildingType: str):
+    if buildingType == "brickHouse":
+        return Config.WORKPLACE_COST.value * Config.WORKPLACE_COST_INC.value * numOfWorkplaces(city, EResources.BRICKS)
+    if buildingType == "farmHouse":
+        return Config.WORKPLACE_COST.value * Config.WORKPLACE_COST_INC.value * numOfWorkplaces(city, EResources.FOOD)
+    if buildingType == "house":
+        return Config.HOUSE_COST.value * Config.HOUSE_COST_INC.value * numOfHouses(city)
+    raise TypeError("Invalid Build Type")

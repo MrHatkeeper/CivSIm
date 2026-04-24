@@ -26,9 +26,11 @@ class Config(Enum):
     Building config
     """
     HOUSE_COST = 10
-    WORKPLACE_COST = 10
-    WORKPLACE_MAX_RESIDENTS = 4
+    HOUSE_COST_INC = 1
     HOUSE_MAX_RESIDENTS = 4
+    WORKPLACE_COST = 40
+    WORKPLACE_COST_INC = 1
+    WORKPLACE_MAX_RESIDENTS = 4
 
     """
     Mayor score config
@@ -40,3 +42,9 @@ class Config(Enum):
     AVG_HAPPINESS_MULT = 1.5
     AVG_HUNGER_MULT = 5
     MAYOR_LOOK_AHEAD = 3
+
+    """
+    Mock config
+    """
+    STARVATION_RATE = 0.2
+    GROWTH_RATE = 0.4

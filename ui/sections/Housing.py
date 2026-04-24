@@ -7,9 +7,8 @@ from civsim.Misc import EconInfo
 def renderHousing(city):
     st.subheader("Housing")
 
-
     data = {
-        "Type":[
+        "Type": [
             "House",
             "Farm",
             "Brick house"
@@ -27,8 +26,13 @@ def renderHousing(city):
 
         "Free spaces": [
             EconInfo.numOfFreeLivingSpaces(city),
-            EconInfo.numOfOccupiedWorkPlaces(city, EResources.FOOD),
-            EconInfo.numOfOccupiedWorkPlaces(city, EResources.BRICKS)
+            EconInfo.numOfFreeWorkPlaces(city, EResources.FOOD),
+            EconInfo.numOfFreeWorkPlaces(city, EResources.BRICKS)
+        ],
+        "Cost to build": [
+            EconInfo.costToBuild(city, "house"),
+            EconInfo.costToBuild(city, "farmHouse"),
+            EconInfo.costToBuild(city, "brickHouse"),
         ]
     }
 

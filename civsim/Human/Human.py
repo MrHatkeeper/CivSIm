@@ -6,6 +6,7 @@ from civsim.Config import Config
 if TYPE_CHECKING:
     from civsim.City.City import City
 
+
 class Human:
     def __init__(self, startAge: int = 0, city: City = None, birthYear: int = None):
         self.age = startAge
@@ -33,9 +34,9 @@ class Human:
         """
         Zjistí, zda člověk má umřít
         """
-        #TODO: make more complex
+        # TODO: make more complex
         if self.happiness < Config.DEATH_BORDER.value:
-            rand = random.randrange(1,100)
+            rand = random.randrange(1, 100)
             if rand < 50 or self.happiness < 0 or self.hunger >= 10:
                 self.city.peopleToKill.append(self)
 
@@ -49,8 +50,7 @@ class Human:
             self.happiness += Config.IS_HOUSED_INC.value
 
         self.happiness += (self.hunger * -1) * Config.HUNGRY_INC.value + Config.HUNGRY_INC.value
-        if self.happiness > 100:
-            self.happiness = 100
+        self.happiness = max(0, min(self.happiness, 100))
 
     def reproduce(self):
         """
@@ -87,8 +87,8 @@ class Human:
             baby = Human(0, city=self.city, birthYear=self.city.year)
 
             baby.house = None
-            baby.hunger = (self.hunger + partner.hunger)/2
-            if self. house is not None and len(self.house.residents) < self.house.capacity:
+            baby.hunger = (self.hunger + partner.hunger) / 2
+            if self.house is not None and len(self.house.residents) < self.house.capacity:
                 baby.house = self.house
                 self.house.residents.append(baby)
             self.city.population.append(baby)

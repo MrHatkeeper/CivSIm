@@ -1,35 +1,34 @@
 from copy import deepcopy
+from math import inf
 
-from civsim.City.MockCity.MockCity import MockCity
+from civsim.City.MockCity import MockCity
 from civsim.City.Workplace.EResources import EResources
 from civsim.Config import Config
-from civsim.Misc import EconInfo, Metrics, PopInfo
 
 
-def evalScore(cityState):
-    """
-    Metoda Vyhodnocuje stav města.
+def evalScore(cityState: MockCity):
+    population = cityState.population
+    happinessScore = cityState.avgHappiness * Config.AVG_HAPPINESS_MULT.value
 
-    :param cityState: City()
-    :return: int
-    """
-    population = len(cityState.population)
+    portion = cityState.getPortion()
 
-    if population == 0:
-        return 0
+    if portion >= 1:
+        foodScore = (portion - 1) * Config.AVG_HUNGER_MULT.value
+    else:
+        foodScore = -(1 - portion) * Config.AVG_HUNGER_MULT.value
 
-    avgHunger = Metrics.getAverage("hunger", cityState)
-    avgHappiness = Metrics.getAverage("happiness", cityState)
+    homeless = max(cityState.population - cityState.occupiedHousing, 0)
+    homelessRatio = homeless / population
 
-    homelessRatio = PopInfo.numOfHomeless(cityState) / population
-    freeHousingRatio = EconInfo.numOfFreeLivingSpaces(cityState) / population
+    freeHousing = max(cityState.occupiedHousing - cityState.population, 0)
+    freeHousingRatio = freeHousing / population
 
-    hungerScore = -avgHunger * Config.AVG_HUNGER_MULT.value
-    happinessScore = avgHappiness * Config.AVG_HAPPINESS_MULT.value
     homelessScore = -homelessRatio * Config.HOMELESS_MULT.value
     housingScore = freeHousingRatio * Config.FREE_HOUSING_SPACE_MULT.value
 
-    return hungerScore + happinessScore + homelessScore + housingScore
+    
+
+    return happinessScore + foodScore + homelessScore + housingScore
 
 
 def makeAction(action, cityState):
@@ -60,26 +59,35 @@ class Mayor:
             "buildBrickHouse": 0,
         }
 
+    def canBuild(self, action) -> bool:
+        if action == "buildHouse":
+            return self.city.buildSystem.canBuild("house")
+        if action == "buildFarm":
+            return self.city.buildSystem.canBuild("farmHouse")
+        if action == "buildBrickHouse":
+            return self.city.buildSystem.canBuild("brickHouse")
+        return True
+
     def decision(self):
         """
         Funkce vyzkouší možné stavy, jak jaká akce ovlivní mésto. Následně vybere a udělá tu nejlepší.
         """
-        startState = deepcopy(self.city)
-
+        bestValue = -inf
         bestAction = list(self.actionValues.keys())[0]
-        bestValue = evalScore(startState)
-
-        mockCity = MockCity(self.city)
-
         for action in self.actionValues.keys():
-            simulatedMockCity = deepcopy(mockCity)
-            simulatedCity = deepcopy(self.city)
-            makeAction(action, simulatedCity)
+            startState = MockCity(self.city)
+            evalValue = -1
+            if action != "nothing":
+                if self.canBuild(action):
+                    startState.mockAction(action)
+                    for lookAhead in range(Config.MAYOR_LOOK_AHEAD.value):
+                        startState.updateMockCity()
 
-            for lookAhead in range(Config.MAYOR_LOOK_AHEAD.value):
-                simulatedCity.updateCity()
-
-            evalValue = evalScore(simulatedCity)
+                    evalValue = evalScore(startState)
+            else:
+                for lookAhead in range(Config.MAYOR_LOOK_AHEAD.value):
+                    startState.updateMockCity()
+                evalValue = evalScore(startState)
             self.actionValues[action] = evalValue
             if evalValue > bestValue:
                 bestAction = action
