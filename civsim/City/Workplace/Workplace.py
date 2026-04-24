@@ -5,6 +5,7 @@ from civsim.Config import Config
 if TYPE_CHECKING:
     from civsim.City.City import City
 
+
 class Workplace:
     def __init__(self, resource: EResources, city: City):
         self.ratio = Config.PROD_RATIO.value

@@ -1,4 +1,6 @@
 from enum import Enum
+
+
 class Config(Enum):
     """
     Soubor s fixními hodnotami.
@@ -38,6 +40,3 @@ class Config(Enum):
     AVG_HAPPINESS_MULT = 1.5
     AVG_HUNGER_MULT = 5
     MAYOR_LOOK_AHEAD = 3
-
-
-

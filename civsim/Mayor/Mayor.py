@@ -1,8 +1,10 @@
 from copy import deepcopy
 
+from civsim.City.MockCity.MockCity import MockCity
 from civsim.City.Workplace.EResources import EResources
 from civsim.Config import Config
 from civsim.Misc import EconInfo, Metrics, PopInfo
+
 
 def evalScore(cityState):
     """
@@ -30,7 +32,6 @@ def evalScore(cityState):
     return hungerScore + happinessScore + homelessScore + housingScore
 
 
-
 def makeAction(action, cityState):
     """
     Metoda postaví budovu v cityState.
@@ -53,10 +54,10 @@ class Mayor:
         self.city = city
         self.lastAction = "nothing"
         self.actionValues = {
-            "nothing" : 0,
-            "buildHouse" : 0,
-            "buildFarm" : 0,
-            "buildBrickHouse" : 0,
+            "nothing": 0,
+            "buildHouse": 0,
+            "buildFarm": 0,
+            "buildBrickHouse": 0,
         }
 
     def decision(self):
@@ -68,7 +69,10 @@ class Mayor:
         bestAction = list(self.actionValues.keys())[0]
         bestValue = evalScore(startState)
 
+        mockCity = MockCity(self.city)
+
         for action in self.actionValues.keys():
+            simulatedMockCity = deepcopy(mockCity)
             simulatedCity = deepcopy(self.city)
             makeAction(action, simulatedCity)
 
@@ -84,4 +88,3 @@ class Mayor:
         makeAction(bestAction, self.city)
         self.city.updateCity()
         self.lastAction = bestAction
-
