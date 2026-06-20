@@ -56,9 +56,9 @@ def getProduction(city: City):
     :return: celková produkce
     """
     out = {}
+    for resource in city.storage:
+        out[resource] = 0
     for workplace in city.workplaces:
-        if workplace.resource not in out:
-            out[workplace.resource] = 0
         out[workplace.resource] += len(workplace.workforce) * workplace.ratio
     return out
 
