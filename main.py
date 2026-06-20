@@ -1,10 +1,10 @@
 from time import sleep
 
-from civsim.GameMaster import GameMaster
+from Civsim.GameMaster import GameMaster
 import streamlit as st
 
-from ui.Dashboard import renderDashboard
-from ui.SideBar import SideBar
+from Ui.Dashboard import renderDashboard
+from Ui.SideBar import SideBar
 
 
 if __name__ == "__main__":
