@@ -42,7 +42,7 @@ class City:
 
         for i in range(startPopulation):
             human = Human(15, city=self, birthYear=self.year)
-            human.isAdult = True
+            human.adult = True
             self.population.append(human)
 
         self.workplaces.append(Workplace(EResources.FOOD, self))
@@ -59,3 +59,4 @@ class City:
         self.populationSystem.updatePopulation()
         self.housingSystem.accommodatePeople()
         self.workplaceSystem.updateWork()
+

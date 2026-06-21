@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from Civsim.City.City import City
 
+
 def getAverage(value: str, city: City):
     """
     Pomocná metoda vrátí průměrnou hodnotu z města.
@@ -19,7 +20,8 @@ def getAverage(value: str, city: City):
             out += human.hunger
     else:
         raise ValueError("Nonexistent value")
-    return round(out / len(city.population),2)
+    return round(out / len(city.population), 2)
+
 
 def getHighest(value: str, city: City):
     """
@@ -40,6 +42,7 @@ def getHighest(value: str, city: City):
     else:
         raise ValueError("Nonexistent value")
     return out
+
 
 def getLowest(value: str, city: City):
     """
@@ -62,3 +65,7 @@ def getLowest(value: str, city: City):
     else:
         raise ValueError("Nonexistent value")
     return out
+
+
+def getMeanHappiness(city: City):
+    return sorted(city.population, key=lambda x: x.happiness, reverse=True)[len(city.population) // 2].happiness

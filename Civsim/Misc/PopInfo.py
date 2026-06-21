@@ -11,7 +11,7 @@ def getAdults(city: City):
     :param city: město, ve kterém metoda hledá.
     :return: pole dospělých lidí
     """
-    return [human for human in city.population if human.isAdult]
+    return [human for human in city.population if human.adult]
 
 def getUnemployed(city: City):
     """
@@ -19,7 +19,7 @@ def getUnemployed(city: City):
     :param city: město, ve kterém metoda hledá.
     :return: pole nezaměstnaných
     """
-    return [human for human in city.population if human.workplace is None and human.isAdult]
+    return [human for human in city.population if human.workplace is None and human.adult]
 
 def getChildren(city: City):
     """
@@ -27,7 +27,7 @@ def getChildren(city: City):
     :param city: město, ve kterém metoda hledá.
     :return: pole dětí
     """
-    return [human for human in city.population if not human.isAdult]
+    return [human for human in city.population if not human.adult]
 
 def numOfHomeless(city: City):
     """
@@ -35,4 +35,4 @@ def numOfHomeless(city: City):
     :param city: město, ve kterém metoda hledá.
     :return: počet bezdomovců
     """
-    return len(city.population) - EconInfo.numOfOccupiedLivingSpaces(city)
+    return len([human for human in city.population if human.house is None])

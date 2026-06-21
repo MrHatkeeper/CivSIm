@@ -7,6 +7,7 @@ from Civsim.Misc import EconInfo
 def renderResources(city):
     production = EconInfo.getProduction(city)
     st.subheader("Production")
+    #print(production)
     data = {
         "Type": [
             "Food",

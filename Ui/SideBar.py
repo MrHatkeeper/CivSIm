@@ -16,18 +16,21 @@ class SideBar:
 
         with mainSettings:
             if not self.gm.isRunning:
-                if st.button("Start simulation", unique(True), disabled=len(self.gm.cities) == 0):
+                if st.button("Run simulation", unique(True), disabled=len(self.gm.cities) == 0):
                     self.gm.isRunning = True
                     st.rerun()
             else:
                 if st.button("Pause simulation", unique(True)):
                     self.gm.isRunning = False
                     st.rerun()
-
-            st.subheader("Create new simulation")
+            if st.button("Load saved city"):
+                self.gm.loader.loadCity()
+                st.rerun()
 
             st.subheader("Simulation speed")
             self.gm.speedMultiplier = st.slider("Years per second", min_value=1, max_value=6, value=1, step=1)
+
+            st.subheader("Create new simulation")
 
             numOfStartCities = st.number_input(
                 "Start cities",
@@ -37,7 +40,7 @@ class SideBar:
             )
 
             if st.button("Create Simulation"):
-                self.gm.startSimulation(numOfStartCities)
+                self.gm.crateSimulation(numOfStartCities)
                 st.rerun()
 
             if st.button("Next year"):

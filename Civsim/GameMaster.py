@@ -13,9 +13,9 @@ class GameMaster:
         self.speed = 1
         self.speedMultiplier = 1
         self.saver = Saver()
-        self.loader = Loader()
+        self.loader = Loader(self)
 
-    def startSimulation(self, numOfStartingCities):
+    def crateSimulation(self, numOfStartingCities):
         """
         Funkce nastaví základní stav simulace.
         :param numOfStartingCities: počet měst na začátku.

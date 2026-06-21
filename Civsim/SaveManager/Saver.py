@@ -1,10 +1,6 @@
 from datetime import datetime
 import json
 
-from Civsim.City.City import City
-from Civsim.Human.Human import Human
-
-
 class Saver:
     def exportCity(self, city):
         save = {
@@ -29,14 +25,10 @@ class Saver:
 
         for workplace in city.workplaces:
             workplaceSave = {"id": str(workplace.id), "workforce": [], "resource": workplace.resource.value}
-            for worker in workplace.workforce:
-                workplaceSave["workforce"] = workplaceSave["workforce"] + [str(worker.id)]
             save["workplaces"].append(workplaceSave)
 
         for house in city.houses:
             houseSave = {"id": str(house.id), "residents": []}
-            for resident in house.residents:
-                houseSave["residents"] = houseSave["residents"] + [str(resident.id)]
             save["houses"].append(houseSave)
 
         saveJson = json.dumps(save)

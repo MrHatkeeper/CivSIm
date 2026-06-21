@@ -16,7 +16,7 @@ class Human:
         self.happiness = 100
         self.hunger = 0
         self.house = None
-        self.isAdult = False
+        self.adult = False
         self.city = city
         self.workplace = None
         self.birthDate = birthYear
@@ -26,11 +26,13 @@ class Human:
         Zestárne člověka, přidá mu hlad, zjistí, jak moc je šťastný a popřípadě ho přidá do seznamu lidí na zabití.
         """
         self.age = self.city.year - self.birthDate
-        if self.age >= Config.ADULT_AGE.value:
-            self.isAdult = True
+        self.isAdult()
         self.hunger += self.hungerRate
         self.evalHappiness()
         self.killHuman()
+
+    def isAdult(self):
+        self.adult = self.age >= Config.ADULT_AGE.value
 
     def killHuman(self):
         """
@@ -58,18 +60,18 @@ class Human:
         """
          Funkce vyhodnotí, zda se člověk má rozmnožit, popřípadě vytvoří dítě.
         """
-        if not self.isAdult:
+        if not self.adult:
             return
         partner = None
 
         if self.house is not None:
             for resident in self.house.residents:
-                if resident is not self and resident.isAdult:
+                if resident is not self and resident.adult:
                     partner = resident
                     break
         else:
             for human in self.city.population:
-                if human is not self and human.isAdult and human.house is None:
+                if human is not self and human.adult and human.house is None:
                     partner = human
                     break
 

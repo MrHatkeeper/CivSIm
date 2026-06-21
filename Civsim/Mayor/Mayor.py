@@ -1,4 +1,3 @@
-from copy import deepcopy
 from math import inf
 
 from Civsim.City.MockCity import MockCity
@@ -78,14 +77,11 @@ class Mayor:
             if action != "nothing":
                 if self.canBuild(action):
                     startState.mockAction(action)
-                    for lookAhead in range(Config.MAYOR_LOOK_AHEAD.value):
-                        startState.updateMockCity()
+            for lookAhead in range(Config.MAYOR_LOOK_AHEAD.value):
+                startState.updateMockCity()
 
-                    evalValue = evalScore(startState)
-            else:
-                for lookAhead in range(Config.MAYOR_LOOK_AHEAD.value):
-                    startState.updateMockCity()
                 evalValue = evalScore(startState)
+
             self.actionValues[action] = evalValue
             if evalValue > bestValue:
                 bestAction = action
