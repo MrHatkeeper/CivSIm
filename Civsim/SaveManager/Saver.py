@@ -31,7 +31,6 @@ class Saver:
             houseSave = {"id": str(house.id), "residents": []}
             save["houses"].append(houseSave)
 
-        saveJson = json.dumps(save)
         fileName = datetime.now()
         with open(f"Saves/{fileName}.json", "w", encoding="utf-8") as f:
-            json.dump(saveJson, f, ensure_ascii=False, indent=4)
+            json.dump(save, f, ensure_ascii=False, indent=4)

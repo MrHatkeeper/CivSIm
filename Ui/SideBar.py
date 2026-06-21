@@ -1,3 +1,5 @@
+from io import StringIO
+
 import streamlit as st
 from numpy.ma.extras import unique
 
@@ -23,8 +25,9 @@ class SideBar:
                 if st.button("Pause simulation", unique(True)):
                     self.gm.isRunning = False
                     st.rerun()
+            uploadedSave = st.file_uploader("Load saved city", accept_multiple_files=False, type="json")
             if st.button("Load saved city"):
-                self.gm.loader.loadCity()
+                self.gm.loader.loadCity(uploadedSave)
                 st.rerun()
 
             st.subheader("Simulation speed")

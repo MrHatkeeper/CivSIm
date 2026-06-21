@@ -35,4 +35,4 @@ def numOfHomeless(city: City):
     :param city: město, ve kterém metoda hledá.
     :return: počet bezdomovců
     """
-    return len([human for human in city.population if human.house is None])
+    return max(len(city.population) - EconInfo.numOfOccupiedLivingSpaces(city), 0)

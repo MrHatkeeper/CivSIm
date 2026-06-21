@@ -1,5 +1,4 @@
 import json
-
 from Civsim.City.City import City
 from Civsim.City.House import House
 from Civsim.City.Workplace.EResources import EResources
@@ -8,19 +7,13 @@ from Civsim.Human.Human import Human
 from Civsim.Mayor.Mayor import Mayor
 
 
-def openSave(fileName):
-    with open(fileName, "r") as jsonFile:
-        data = json.loads(json.load(jsonFile))
-        return data
-
-
 class Loader:
     def __init__(self, gm):
-        self.path = "Saves/2026-06-21 16:13:09.036057.json"
         self.gm = gm
 
-    def loadCity(self):
-        savedCity = openSave(self.path)
+    def loadCity(self, savefile):
+        data = json.load(savefile)
+        savedCity = data
         loadedCity = City(-1, 0, self.gm)
         loadedCity.mayor = Mayor(loadedCity)
         loadedCity.name = savedCity["name"]
