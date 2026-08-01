@@ -14,6 +14,7 @@ class GameMaster:
         self.speedMultiplier = 1
         self.saver = Saver()
         self.loader = Loader(self)
+        self.historyData = {}
 
     def crateSimulation(self, numOfStartingCities):
         """

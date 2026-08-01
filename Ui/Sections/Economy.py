@@ -6,25 +6,15 @@ from Civsim.Misc import EconInfo
 
 def renderResources(city):
     production = EconInfo.getProduction(city)
-    st.subheader("Production")
-    #print(production)
     data = {
         "Type": [
             "Food",
             "Building resources",
         ],
-        "Production per one worker":[
-            Config.PROD_RATIO.value,
-            Config.PROD_RATIO.value
-        ],
-        "Production per year": [
-            production[EResources.FOOD],
-            production[EResources.BRICKS]
-        ],
-        "In storage": [
-            round(city.storage[EResources.FOOD], 1),
-            round(city.storage[EResources.BRICKS], 1),
-        ]
+        "Production per one worker": [Config.PROD_RATIO.value] * len(production),
+        "Production per year": list(production.values()),
+        "In storage": [round(i, 1) for i in city.storage.values()]
     }
+    st.subheader("Production")
 
     st.table(data)

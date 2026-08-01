@@ -20,6 +20,8 @@ def getAverage(value: str, city: City):
             out += human.hunger
     else:
         raise ValueError("Nonexistent value")
+    if out == 0:
+        return 0
     return round(out / len(city.population), 2)
 
 

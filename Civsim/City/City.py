@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 
 from Civsim.City.House import House
 from Civsim.City.Systems.BuildSystem import BuildSystem
+from Civsim.City.Systems.HistorySystem import HistorySystem
 from Civsim.City.Systems.HousingSystem import HousingSystem
 from Civsim.City.Systems.PopulationSystem import PopulationSystem
 from Civsim.City.Systems.WorkSystem import WorkSystem
@@ -28,6 +29,7 @@ class City:
         self.housingSystem = HousingSystem(self)
         self.workplaceSystem = WorkSystem(self)
         self.buildSystem = BuildSystem(self)
+        self.historySystem = HistorySystem(self)
         self.mayor = mayor
         self.spawnCity(startPopulation)
 
@@ -59,4 +61,5 @@ class City:
         self.workplaceSystem.updateWork()
         self.populationSystem.updatePopulation()
         self.housingSystem.accommodatePeople()
+        self.historySystem.saveData()
 

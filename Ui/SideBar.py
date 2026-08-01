@@ -1,9 +1,7 @@
-from io import StringIO
 
 import streamlit as st
 from numpy.ma.extras import unique
 
-from Civsim.SaveManager.Saver import Saver
 
 
 class SideBar:
