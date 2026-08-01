@@ -36,6 +36,7 @@ def renderDashboard(gm):
         gm.saver.exportCity(city)
 
     st.title(f"City: {city.name}")
+    st.write(f"Year in city: {city.year}")
 
     if len(city.population) == 0:
         st.write(f"# City disappeared on year {city.year}")

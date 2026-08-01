@@ -1,3 +1,5 @@
+from os import popen
+
 from Civsim.City.Workplace.EResources import EResources
 from Civsim.Config import Config
 from Civsim.Misc import EconInfo, Metrics
@@ -9,23 +11,16 @@ class MockCity:
         self.population = len(city.population)
         self.occupiedHousing = EconInfo.numOfOccupiedLivingSpaces(city)
         self.freeHousing = EconInfo.numOfFreeLivingSpaces(city)
+        self.storage = {EResources.FOOD: city.storage[EResources.FOOD], EResources: city.storage[EResources.BRICKS]}
 
         self.avgHappiness = Metrics.getAverage("happiness", city)
 
     def updateMockCity(self):
-        self.updateMockPopulation()
+        self.accommodateMockPopulation()
+        self.mockFeedPopulation()
         self.mockAvgHappiness()
 
-    def updateMockPopulation(self):
-        if self.population == 0:
-            return
-
-        homeless = max(self.population - self.occupiedHousing, 0)
-        toMove = min(homeless, self.freeHousing)
-
-        self.occupiedHousing += toMove
-        self.freeHousing -= toMove
-
+    def mockFeedPopulation(self):
         portion = self.getPortion()
 
         if portion < 1:
@@ -38,12 +33,23 @@ class MockCity:
             growth = int(self.population * (portion - 1) * Config.GROWTH_RATE.value)
 
             self.population += growth
+        self.storage[EResources.FOOD] - portion * self.population
+
+    def accommodateMockPopulation(self):
+        if self.population == 0:
+            return
+
+        homeless = max(self.population - self.occupiedHousing, 0)
+        toMove = min(homeless, self.freeHousing)
+
+        self.occupiedHousing += toMove
+        self.freeHousing -= toMove
 
     def mockAvgHappiness(self):
         homelessRatio = max(self.population - self.occupiedHousing, 0) / self.population
         housingImpact = -homelessRatio * Config.IS_HOUSED_INC.value
 
-        portion = (self.production[EResources.FOOD] / self.population) / Config.HUNGER_RATE.value
+        portion = self.getPortion()
         hungerImpact = Config.HUNGRY_INC.value * (portion - 1)
 
         self.avgHappiness += housingImpact + portion * hungerImpact
@@ -58,4 +64,5 @@ class MockCity:
         self.updateMockCity()
 
     def getPortion(self):
-        return (self.production[EResources.FOOD] / self.population) / Config.HUNGER_RATE.value
+        return ((self.production[EResources.FOOD] + self.storage[
+            EResources.FOOD]) / self.population) / Config.HUNGER_RATE.value

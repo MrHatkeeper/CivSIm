@@ -26,7 +26,7 @@ class SideBar:
                     self.gm.isRunning = False
                     st.rerun()
             uploadedSave = st.file_uploader("Load saved city", accept_multiple_files=False, type="json")
-            if st.button("Load saved city"):
+            if st.button("Load saved city", disabled= uploadedSave is None):
                 self.gm.loader.loadCity(uploadedSave)
                 st.rerun()
 

@@ -56,7 +56,7 @@ class City:
         Funkce zavolá všechny pomocné systémy na aktualizaci města.
         """
         self.year += 1
+        self.workplaceSystem.updateWork()
         self.populationSystem.updatePopulation()
         self.housingSystem.accommodatePeople()
-        self.workplaceSystem.updateWork()
 
