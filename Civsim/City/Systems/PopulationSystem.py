@@ -6,7 +6,13 @@ from Civsim.City.Workplace.EResources import EResources
 if TYPE_CHECKING:
     from Civsim.City.City import City
 
+
 class PopulationSystem:
+    """
+    Reprezentace systému pro spravování obyvatel města
+    :param city: město, kterému patří
+    """
+
     def __init__(self, city: City):
         self.city = city
 

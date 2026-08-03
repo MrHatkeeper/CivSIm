@@ -7,7 +7,13 @@ from Civsim.Misc import EconInfo, Metrics
 if TYPE_CHECKING:
     from Civsim.City.City import City
 
+
 class MockCity:
+    """
+    Model města, které je upraveno od normálního modelu města pro jednodušší vyhodnocování.
+    :param city: ze kterého města vychází
+    """
+
     def __init__(self, city: City):
         self.production = EconInfo.getProduction(city)
         self.population = len(city.population)
@@ -18,11 +24,17 @@ class MockCity:
         self.avgHappiness = Metrics.getAverage("happiness", city)
 
     def updateMockCity(self):
+        """
+        Posune stav města o jeden rok dopředu.
+        """
         self.accommodateMockPopulation()
         self.mockFeedPopulation()
         self.mockAvgHappiness()
 
     def mockFeedPopulation(self):
+        """
+        Funkce pro rozdělení jídla populaci.
+        """
         portion = self.getPortion()
 
         if portion < 1:
@@ -38,6 +50,9 @@ class MockCity:
         self.storage[EResources.FOOD] - portion * self.population
 
     def accommodateMockPopulation(self):
+        """
+        Funkce pro rozdělení volných míst k bydlení
+        """
         if self.population == 0:
             return
 
@@ -48,6 +63,9 @@ class MockCity:
         self.freeHousing -= toMove
 
     def mockAvgHappiness(self):
+        """
+        Funkce pro výpočet průměrné radosti
+        """
         homelessRatio = max(self.population - self.occupiedHousing, 0) / self.population
         housingImpact = -homelessRatio * Config.IS_HOUSED_INC.value
 
@@ -57,6 +75,10 @@ class MockCity:
         self.avgHappiness += housingImpact + portion * hungerImpact
 
     def mockAction(self, action: str):
+        """
+        Provede akci na městě pro následovné vyhodnocení
+        :param action: jaká akce se má stát
+        """
         if action == "buildHouse":
             self.freeHousing += Config.HOUSE_MAX_RESIDENTS.value
         elif action == "buildFarm":
@@ -66,5 +88,9 @@ class MockCity:
         self.updateMockCity()
 
     def getPortion(self):
+        """
+        Výpočet, kolik je příděl jídla
+        :return: velikost porce pro jednoho člověka
+        """
         return ((self.production[EResources.FOOD] + self.storage[
             EResources.FOOD]) / self.population) / Config.HUNGER_RATE.value

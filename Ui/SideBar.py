@@ -1,15 +1,20 @@
-
 import streamlit as st
 from numpy.ma.extras import unique
 
 
-
 class SideBar:
+    """
+    Reprezentace bočního panelu
+    """
+
     def __init__(self, gm):
         self.gm = gm
         self.render()
 
     def render(self):
+        """
+        Slouží k vykreslení bočního panelu
+        """
         mainSettings = st.sidebar.container()
 
         mainSettings.title("Simulation Control")
@@ -25,7 +30,7 @@ class SideBar:
                     st.rerun()
             st.subheader("Load simulation")
             uploadedSave = st.file_uploader(" ", accept_multiple_files=False, type="json")
-            if st.button("Load saved city", disabled= uploadedSave is None):
+            if st.button("Load saved city", disabled=uploadedSave is None):
                 self.gm.loader.loadCity(uploadedSave)
                 st.rerun()
 

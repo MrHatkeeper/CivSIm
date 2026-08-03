@@ -5,6 +5,10 @@ from Civsim.Misc import Metrics, EconInfo
 
 
 def renderHunger(city: City):
+    """
+    Vykresluje statistiky ohledně jídla ve městě
+    :param city: jaké město se vykresluje
+    """
     st.subheader("Hunger")
     st.write(f"Food consumption per year: {EconInfo.getConsumption(city)}")
 

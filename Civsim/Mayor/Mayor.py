@@ -8,7 +8,13 @@ from Civsim.Config import Config
 if TYPE_CHECKING:
     from Civsim.City.City import City
 
+
 def evalScore(cityState: MockCity):
+    """
+    Funkce pro vyhodnocení akce v modelu zjednodušeného města
+    :param cityState:
+    :return: skóre zjednodušeného města
+    """
     population = cityState.population
     happinessScore = cityState.avgHappiness * Config.AVG_HAPPINESS_MULT.value
 
@@ -49,6 +55,11 @@ def makeAction(action: str, cityState: City):
 
 
 class Mayor:
+    """
+    Reprezentace vyhodnocovacího modelu
+    :param city: kterému městu model patří
+    """
+
     def __init__(self, city):
         self.city = city
         self.lastAction = "nothing"
@@ -60,13 +71,20 @@ class Mayor:
         }
 
     def canBuild(self, action: str) -> bool:
+        """
+        Zjednodušené volání, zda model může postavit určitou budovu
+        :param action: jakou budovu chce postavit
+        :return: zda může danou budovu postavut, popřípadě vrátí True, pokud se jedná o akci nothing
+        """
         if action == "buildHouse":
             return self.city.buildSystem.canBuild("house")
         if action == "buildFarm":
             return self.city.buildSystem.canBuild("farmHouse")
         if action == "buildBrickHouse":
             return self.city.buildSystem.canBuild("brickHouse")
-        return True
+        if action == "nothing":
+            return True
+        return False
 
     def decision(self):
         """

@@ -6,6 +6,10 @@ from Civsim.Misc import EconInfo
 
 
 def renderResources(city: City):
+    """
+    Vykreslení stavu skladu města
+    :param city:
+    """
     production = EconInfo.getProduction(city)
     data = {
         "Type": [

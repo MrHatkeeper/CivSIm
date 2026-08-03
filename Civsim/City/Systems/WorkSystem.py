@@ -7,6 +7,11 @@ from Civsim.Misc import PopInfo
 
 
 class WorkSystem:
+    """
+    Reprezentace systému pro produkci surovin.
+    :param city: město, kterému patří
+    """
+
     def __init__(self, city: City):
         self.city = city
 

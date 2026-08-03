@@ -4,6 +4,10 @@ from Civsim.City.City import City
 
 
 def renderStatistics(city: City):
+    """
+    Slouží k vykreslení grafů
+    :param city: jaké město se vykresluje
+    """
     data = city.historySystem.showData()
     if len(data) == 0:
         return

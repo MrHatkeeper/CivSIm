@@ -1,6 +1,5 @@
 from typing import TYPE_CHECKING
 
-
 from Civsim.City.House import House
 from Civsim.City.Systems.BuildSystem import BuildSystem
 from Civsim.City.Systems.HistorySystem import HistorySystem
@@ -17,6 +16,15 @@ if TYPE_CHECKING:
 
 
 class City:
+    """
+    Reprezentace jednoho města
+    :param
+    numOfCities: kolikáté je to město
+    startPopulation: s kolika obyvateli má město začínat
+    gm: Správce světa
+    mayor: který model se o město stará
+    """
+
     def __init__(self, numOfCity: int, startPopulation: int, gm: GameMaster, mayor: Mayor = None):
         self.name = f"City {numOfCity}"
         self.houses = []
@@ -62,4 +70,3 @@ class City:
         self.populationSystem.updatePopulation()
         self.housingSystem.accommodatePeople()
         self.historySystem.saveData()
-

@@ -3,7 +3,7 @@ from enum import Enum
 
 class Config(Enum):
     """
-    Soubor s fixními hodnotami.
+    Soubor s fixními hodnotami potřebné pro simulaci.
     """
 
     """

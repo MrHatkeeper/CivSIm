@@ -9,6 +9,14 @@ if TYPE_CHECKING:
 
 
 class Human:
+    """
+    Reprezentace jednoho člověka ve městě.
+
+    :param startAge: v jakém věku se člověk má objevit
+    :param city: ve kterém městě je
+    :param birthYear: v jakém roce se člověk narodil
+    """
+
     def __init__(self, startAge: int = 0, city: City = None, birthYear: int = None):
         self.id = uuid.uuid4()
         self.age = startAge
@@ -32,6 +40,9 @@ class Human:
         self.killHuman()
 
     def isAdult(self):
+        """
+        Vyhodnocuje, zda je již člověk dospělý
+        """
         self.adult = self.age >= Config.ADULT_AGE.value
 
     def killHuman(self):

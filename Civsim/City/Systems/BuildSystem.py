@@ -11,6 +11,11 @@ if TYPE_CHECKING:
 
 
 class BuildSystem:
+    """
+    Reprezentace systému pro stavbu budov
+    :param city: město, kterému patří
+    """
+
     def __init__(self, city: City):
         self.city = city
 

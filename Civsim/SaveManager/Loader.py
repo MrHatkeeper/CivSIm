@@ -11,7 +11,14 @@ from Civsim.Mayor.Mayor import Mayor
 if TYPE_CHECKING:
     from Civsim.GameMaster import GameMaster
 
+
 def loadWorkplaces(workplaces: list[dict[str, str]], city: City):
+    """
+    Metoda pro načtení stavu všech dílen uloženého města do města v simulaci
+    :param workplaces: uložené dílny
+    :param city: město, kam dílna patří
+    :return: list načtených dílen
+    """
     out = []
     for workplace in workplaces:
         res = None
@@ -19,6 +26,8 @@ def loadWorkplaces(workplaces: list[dict[str, str]], city: City):
             res = EResources.FOOD
         if workplace["resource"] == 2:
             res = EResources.BRICKS
+        if res is None:
+            raise ValueError("Resource not found")
         loadedWorkplace = Workplace(res, city)
         loadedWorkplace.id = workplace["id"]
         out.append(loadedWorkplace)
@@ -26,6 +35,11 @@ def loadWorkplaces(workplaces: list[dict[str, str]], city: City):
 
 
 def loadHouses(houses: list[dict[str, str]]):
+    """
+    Metoda pro načtení uložených budov do města v simulaci
+    :param houses: uložená města
+    :return: list uložených budov
+    """
     out = []
     for house in houses:
         loadedHouse = House()
@@ -35,6 +49,11 @@ def loadHouses(houses: list[dict[str, str]]):
 
 
 def loadHumans(humans: list[dict[str, str]], city: City):
+    """
+    Metoda pro načtení lidí z uloženého město do města v simulaci a jejich následně rozdělení kam patří
+    :param humans: uložená populace
+    :param city: město, kam patří
+    """
     for human in humans:
         loadedHuman = Human()
         loadedHuman.id = human["id"]
@@ -61,11 +80,34 @@ def loadHumans(humans: list[dict[str, str]], city: City):
         city.population.append(loadedHuman)
 
 
+def loadHistory(history: dict[str, list[str]]):
+    """
+    Metoda pro načtení historie uloženého města
+    :param history: jaká historie se má načíst
+    :return: připravená historie k načtení
+    """
+    historyData = {}
+    for record in history.keys():
+        if record not in historyData:
+            historyData[record] = []
+        for value in history[record]:
+            historyData[record].append(float(value))
+    return historyData
+
+
 class Loader:
+    """
+    Třídá pro načtení města do simulace
+    """
+
     def __init__(self, gm: GameMaster):
         self.gm = gm
 
     def loadCity(self, savefile):
+        """
+        Funkce k načtení města ze souboru do simulace
+        :param savefile: cesta k souboru s městem
+        """
         data = json.load(savefile)
         savedCity = data
         loadedCity = City(-1, 0, self.gm)
@@ -82,3 +124,5 @@ class Loader:
         loadedCity.workplaces += loadWorkplaces(savedCity["workplaces"], loadedCity)
         loadedCity.houses += loadHouses(savedCity["houses"])
         loadHumans(savedCity["population"], loadedCity)
+        loadedCity.historySystem.happinessData = loadHistory(savedCity["happinessData"])
+        loadedCity.historySystem.populationData = loadHistory(savedCity["populationData"])

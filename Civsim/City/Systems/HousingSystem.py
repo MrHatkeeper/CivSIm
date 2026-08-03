@@ -3,6 +3,7 @@ from typing import TYPE_CHECKING
 if TYPE_CHECKING:
     from Civsim.City.City import City
 
+
 def accommodateHuman(human, house):
     """
     Pomoconá funkce pro přiřazení domu člověku.
@@ -12,7 +13,13 @@ def accommodateHuman(human, house):
     human.house = house
     house.residents.append(human)
 
+
 class HousingSystem:
+    """
+    Reprezentace systému pro ubytovávání lidí
+    :param city: město, kterému patří
+    """
+
     def __init__(self, city: City):
         self.city = city
 

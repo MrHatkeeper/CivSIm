@@ -70,4 +70,9 @@ def getLowest(value: str, city: City):
 
 
 def getMeanHappiness(city: City):
+    """
+    Vrací medián radosti obyvatel.
+    :param city: pro které město se počítá
+    :return: medián radosti obyvatel
+    """
     return sorted(city.population, key=lambda x: x.happiness, reverse=True)[len(city.population) // 2].happiness

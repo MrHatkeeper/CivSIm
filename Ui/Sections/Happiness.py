@@ -5,6 +5,10 @@ from Civsim.Misc import Metrics
 
 
 def renderHappiness(city: City):
+    """
+    Vykreslení statistik radosti populace ve městě
+    :param city: jaké město se vykresluje
+    """
     st.subheader("Happiness")
 
     st.write(f"Average: {Metrics.getAverage('happiness', city)}")

@@ -1,19 +1,23 @@
 import streamlit as st
 
 from Civsim.City.City import City
-from Civsim.GameMaster import GameMaster
 from Ui.Sections.Population import renderPopulation
 from Ui.Sections.Housing import renderHousing
 from Ui.Sections.Happiness import renderHappiness
 from Ui.Sections.Hunger import renderHunger
 from Ui.Sections.Economy import renderResources
-from Ui.Sections.MayorVal import renderMayor
+from Ui.Sections.MayorOverview import renderMayor
 from Ui.Sections.Statistics import renderStatistics
+from Civsim.SaveManager.Saver import exportCity
 
 
-def renderCityPreview(city: City, gm: GameMaster):
+def renderCityPreview(city: City):
+    """
+    Vykreslení náhledu města
+    :param city: jaké město se vykresluje
+    """
     if st.button("Save City"):
-        gm.saver.exportCity(city)
+        exportCity(city)
 
     st.title(f"City: {city.name}")
     st.write(f"Year in city: {city.year}")

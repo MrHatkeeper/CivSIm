@@ -5,6 +5,7 @@ from Civsim.Misc import EconInfo
 if TYPE_CHECKING:
     from Civsim.City.City import City
 
+
 def getAdults(city: City):
     """
     Metoda vrátí všecnhy dospělé lidi ve městě.
@@ -12,6 +13,7 @@ def getAdults(city: City):
     :return: pole dospělých lidí
     """
     return [human for human in city.population if human.adult]
+
 
 def getUnemployed(city: City):
     """
@@ -21,6 +23,7 @@ def getUnemployed(city: City):
     """
     return [human for human in city.population if human.workplace is None and human.adult]
 
+
 def getChildren(city: City):
     """
     Metoda vrátí všechny děti ve městě
@@ -28,6 +31,7 @@ def getChildren(city: City):
     :return: pole dětí
     """
     return [human for human in city.population if not human.adult]
+
 
 def numOfHomeless(city: City):
     """

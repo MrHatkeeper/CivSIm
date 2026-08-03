@@ -6,6 +6,10 @@ from Civsim.Misc import EconInfo
 
 
 def renderHousing(city: City):
+    """
+    Vykresluje statistiky bydlení.
+    :param city: jaké město se vykresluje
+    """
     st.subheader("Housing")
 
     data = {

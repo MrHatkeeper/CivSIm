@@ -4,7 +4,10 @@ from Civsim.City.City import City
 
 
 def renderMayor(city: City):
-
+    """
+    Vykresluje, jak vyšly hodnoty vyhodnocovacího modelu
+    :param city: jaké město se vykresluje
+    """
     if city.mayor is None:
         return
 

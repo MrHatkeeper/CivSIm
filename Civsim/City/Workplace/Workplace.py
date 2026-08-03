@@ -8,6 +8,13 @@ if TYPE_CHECKING:
 
 
 class Workplace:
+    """
+    Reprezentace jedné dílny
+    :param:
+    resource: typ suroviny
+    city: město, kterému patří
+    """
+
     def __init__(self, resource: EResources, city: City):
         self.id = uuid.uuid4()
         self.ratio = Config.PROD_RATIO.value

@@ -106,6 +106,12 @@ def numOfOccupiedLivingSpaces(city: City):
 
 
 def costToBuild(city: City, buildingType: str):
+    """
+    Funkce pro výpočet, kolik bude stát postavit danou budovu.
+    :param city: ve kterém městě se má budova postavit
+    :param buildingType: typ budovy
+    :return: cena budovy
+    """
     if buildingType == "brickHouse":
         return Config.WORKPLACE_COST.value * Config.WORKPLACE_COST_INC.value * numOfWorkplaces(city, EResources.BRICKS)
     if buildingType == "farmHouse":

@@ -5,6 +5,10 @@ from Civsim.Misc import PopInfo
 
 
 def renderPopulation(city: City):
+    """
+    Vykresluje údaje o populaci
+    :param city: jaké město se vykresluje
+    """
     st.subheader("Quantity")
 
     st.write(f"Total: {len(city.population)}")
