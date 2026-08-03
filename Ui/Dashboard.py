@@ -1,9 +1,10 @@
 import streamlit as st
 
+from Civsim.GameMaster import GameMaster
 from Ui.Sections.CityPreview import renderCityPreview
 
 
-def renderDashboard(gm):
+def renderDashboard(gm: GameMaster):
     citiesToSelect = {city.name: city for city in gm.cities}
     if "selected_city" not in st.session_state:
         st.session_state.selected_city = None

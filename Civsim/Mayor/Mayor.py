@@ -1,9 +1,12 @@
 from math import inf
+from typing import TYPE_CHECKING
 
 from Civsim.City.MockCity import MockCity
 from Civsim.City.Workplace.EResources import EResources
 from Civsim.Config import Config
 
+if TYPE_CHECKING:
+    from Civsim.City.City import City
 
 def evalScore(cityState: MockCity):
     population = cityState.population
@@ -28,7 +31,7 @@ def evalScore(cityState: MockCity):
     return happinessScore + foodScore + homelessScore + housingScore
 
 
-def makeAction(action, cityState):
+def makeAction(action: str, cityState: City):
     """
     Metoda postaví budovu v cityState.
     :param action: str
@@ -56,7 +59,7 @@ class Mayor:
             "buildBrickHouse": 0,
         }
 
-    def canBuild(self, action) -> bool:
+    def canBuild(self, action: str) -> bool:
         if action == "buildHouse":
             return self.city.buildSystem.canBuild("house")
         if action == "buildFarm":

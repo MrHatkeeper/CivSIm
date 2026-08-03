@@ -1,10 +1,11 @@
 import streamlit as st
 
+from Civsim.City.City import City
 from Civsim.City.Workplace.EResources import EResources
 from Civsim.Misc import EconInfo
 
 
-def renderHousing(city):
+def renderHousing(city: City):
     st.subheader("Housing")
 
     data = {

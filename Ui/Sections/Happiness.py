@@ -1,8 +1,10 @@
 import streamlit as st
+
+from Civsim.City.City import City
 from Civsim.Misc import Metrics
 
 
-def renderHappiness(city):
+def renderHappiness(city: City):
     st.subheader("Happiness")
 
     st.write(f"Average: {Metrics.getAverage('happiness', city)}")

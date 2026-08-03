@@ -1,12 +1,14 @@
-from os import popen
+from typing import TYPE_CHECKING
 
 from Civsim.City.Workplace.EResources import EResources
 from Civsim.Config import Config
 from Civsim.Misc import EconInfo, Metrics
 
+if TYPE_CHECKING:
+    from Civsim.City.City import City
 
 class MockCity:
-    def __init__(self, city):
+    def __init__(self, city: City):
         self.production = EconInfo.getProduction(city)
         self.population = len(city.population)
         self.occupiedHousing = EconInfo.numOfOccupiedLivingSpaces(city)

@@ -1,8 +1,13 @@
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from Civsim.City.City import City
+
 from Civsim.Misc import PopInfo
 
 
 class WorkSystem:
-    def __init__(self, city):
+    def __init__(self, city: City):
         self.city = city
 
     def updateWork(self):

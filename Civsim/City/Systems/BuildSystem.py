@@ -1,7 +1,5 @@
 from typing import TYPE_CHECKING
 
-from streamlit import exception
-
 from Civsim.City.House import House
 from Civsim.City.Workplace.EResources import EResources
 from Civsim.City.Workplace.Workplace import Workplace

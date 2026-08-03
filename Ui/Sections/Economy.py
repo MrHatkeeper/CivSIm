@@ -1,10 +1,11 @@
 import streamlit as st
-from Civsim.City.Workplace.EResources import EResources
+
+from Civsim.City.City import City
 from Civsim.Config import Config
 from Civsim.Misc import EconInfo
 
 
-def renderResources(city):
+def renderResources(city: City):
     production = EconInfo.getProduction(city)
     data = {
         "Type": [

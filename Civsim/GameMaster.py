@@ -16,7 +16,7 @@ class GameMaster:
         self.loader = Loader(self)
         self.historyData = {}
 
-    def crateSimulation(self, numOfStartingCities):
+    def crateSimulation(self, numOfStartingCities: int):
         """
         Funkce nastaví základní stav simulace.
         :param numOfStartingCities: počet měst na začátku.

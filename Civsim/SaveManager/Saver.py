@@ -1,8 +1,11 @@
 from datetime import datetime
 import json
 
+from Civsim.City.City import City
+
+
 class Saver:
-    def exportCity(self, city):
+    def exportCity(self, city: City):
         save = {
             "name": city.name,
             "year": city.year,
@@ -28,7 +31,7 @@ class Saver:
             save["workplaces"].append(workplaceSave)
 
         for house in city.houses:
-            houseSave = {"id": str(house.id), "residents": []}
+            houseSave = {"id": str(house.id)}
             save["houses"].append(houseSave)
 
         fileName = datetime.now()

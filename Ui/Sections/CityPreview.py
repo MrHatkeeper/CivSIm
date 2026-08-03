@@ -1,5 +1,7 @@
 import streamlit as st
 
+from Civsim.City.City import City
+from Civsim.GameMaster import GameMaster
 from Ui.Sections.Population import renderPopulation
 from Ui.Sections.Housing import renderHousing
 from Ui.Sections.Happiness import renderHappiness
@@ -9,7 +11,7 @@ from Ui.Sections.MayorVal import renderMayor
 from Ui.Sections.Statistics import renderStatistics
 
 
-def renderCityPreview(city, gm):
+def renderCityPreview(city: City, gm: GameMaster):
     if st.button("Save City"):
         gm.saver.exportCity(city)
 

@@ -1,10 +1,15 @@
+from typing import TYPE_CHECKING
+
 import pandas as pd
+
+if TYPE_CHECKING:
+    from Civsim.City.City import City
 
 from Civsim.Misc import PopInfo, Metrics
 
 
 class HistorySystem:
-    def __init__(self, city):
+    def __init__(self, city: City):
         self.city = city
         self.populationData = []
         self.populationData = {"year": [0], "total": [0], "homeless": [0]}

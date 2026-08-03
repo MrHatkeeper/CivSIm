@@ -1,8 +1,10 @@
 import streamlit as st
+
+from Civsim.City.City import City
 from Civsim.Misc import PopInfo
 
 
-def renderPopulation(city):
+def renderPopulation(city: City):
     st.subheader("Quantity")
 
     st.write(f"Total: {len(city.population)}")

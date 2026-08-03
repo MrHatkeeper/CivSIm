@@ -1,21 +1,15 @@
 import streamlit as st
 
-"""
-Co chci měřit
+from Civsim.City.City import City
 
-Avg happiness
-Počet lidí
-Počet bezdomovců
-Storage
-Počet budov
-Jakých budov
-"""
-def renderStatistics(city):
+
+def renderStatistics(city: City):
     data = city.historySystem.showData()
     if len(data) == 0:
         return
     else:
         st.title("Statistics")
+        st.subheader("Population graph")
         st.line_chart(data[0], x="year", y_label="Number of people")
+        st.subheader("Happiness graph")
         st.line_chart(data[1], x="year", y_label="units of happiness")
-
