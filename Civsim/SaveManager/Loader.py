@@ -66,7 +66,6 @@ class Loader:
         self.gm = gm
 
     def loadCity(self, savefile):
-        print(type(savefile))
         data = json.load(savefile)
         savedCity = data
         loadedCity = City(-1, 0, self.gm)

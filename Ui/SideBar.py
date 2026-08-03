@@ -23,7 +23,8 @@ class SideBar:
                 if st.button("Pause simulation", unique(True)):
                     self.gm.isRunning = False
                     st.rerun()
-            uploadedSave = st.file_uploader("Load saved city", accept_multiple_files=False, type="json")
+            st.subheader("Load simulation")
+            uploadedSave = st.file_uploader(" ", accept_multiple_files=False, type="json")
             if st.button("Load saved city", disabled= uploadedSave is None):
                 self.gm.loader.loadCity(uploadedSave)
                 st.rerun()
