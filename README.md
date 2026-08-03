@@ -2,7 +2,7 @@
 
 ## O co se jedná
 
-CimvSim je jednoduchá simulace města založená na radosti obyvatel, možnosti bydlení a dostupnosti jídla pomocí
+CimvSim je jednoduchá simulace města založená na radosti obyvatel, dostupnosti bydlení a dostupnosti jídla pomocí
 vyhodnocovacího modelu.
 
 ## Cíl projektu
@@ -13,18 +13,19 @@ vyhodnocovacího modelu.
 ## Návrh architektury
 
 Projekt je rozdělen do několika podadresářů. Samotná funkcionalita města je rozdělena do systémů, aby se předešlo
-jednomu přehlcenému souboru. Podobným způsobem je vedeno vykreslování, které je taktéž rozděleno do sekcí.
+jednomu přehlcenému souboru. Podobným způsobem je vedeno i vykreslování, které je taktéž rozděleno do jednotlivých
+sekcí.
 
 - `CimvSim/` - obsahuje kód simulace.
-    - `City/`- obsahuje kód pro funkcli města.
-        - `Systems/` - obsahuje jednotné systémy města.
-        - `Workplace/`- obsahuje kód pro výpočet surovin ve skladu.
+    - `City/`- obsahuje kód pro funkci města.
+        - `Systems/` - obsahuje jednotlivé systémy města.
+        - `Workplace/`- obsahuje kód pro výpočet a produkci surovin ve skladu.
     - `Human/` - obsahuje kód pro obyvatele a výpočet radosti.
     - `Mayor/` - obsahuje kód vyhodnocovacího modelu.
-    - `Misc/` - pomocné funkce pro získávání dat,
-    - `SaveManager/` - kód pro načítání a ukládání historie města.
+    - `Misc/` - obsahuje pomocné funkce pro získávání dat.
+    - `SaveManager/` - obsahuje kód pro načítání a ukládání historie města.
 - `Saves/` - složka pro uložené stavy měst.
-- `Ui/` - vykreslování dat na uživatelského rozhraní.
+- `Ui/` - vykreslování dat v uživatelském rozhraní.
     - `Sections/` - sekce pro vykreslení.
 - `main.py` - hlavní soubor, který slouží k zapnutí.
 
@@ -34,19 +35,22 @@ jednomu přehlcenému souboru. Podobným způsobem je vedeno vykreslování, kte
 
 1. Projekt se zapne pomocí `streamlit run main.py`.
 2. Následně se otevře prohlížečové rozhraní.
-3. V sekci **Create new simulation** si uživatel nakliká, kolik chce simulovat měst zároveň.
+3. V sekci **Create new simulation** si uživatel nastaví, kolik chce simulovat měst zároveň.
 4. Simulace se automaticky spustí.
 
 ### Pozastavení simulace
-1. Uživatel klikne v sekci **Simulation Control** na tlačítko **Pause simulation**.
-2. Pro zapnutí klikne na tlačítko **Run simulation**
 
-###  Uložení stavu města
+1. Uživatel klikne v sekci **Simulation Control** na tlačítko **Pause simulation**.
+2. Pro opětovné spuštění simulace uživatel klikne na tlačítko **Run simulation**
+
+### Uložení stavu města
+
 1. Uživatel si v nabídce měst rozklikne město, které chce uložit.
 2. Pod nabídkou klikne na tlačítko **Save City**
 3. Město se uloží do složky `Saves/`
 
 ### Načtení uloženého města
+
 1. Uživatel klikne v sekci **Load saved city** na tlačítko **Browse files**.
 2. Uživateli se otevře prohlížeč souborů, kde si může vybrat, jaké město chce načíst.
 3. Uživatel vybere soubor.
