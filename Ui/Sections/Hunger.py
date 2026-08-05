@@ -1,7 +1,7 @@
 import streamlit as st
 
 from Civsim.City.City import City
-from Civsim.Misc import Metrics, EconInfo
+from Civsim.Misc import EconInfo, Metrics
 
 
 def renderHunger(city: City):

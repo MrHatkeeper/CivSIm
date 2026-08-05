@@ -8,6 +8,7 @@ click==8.3.1
 gitdb==4.0.12
 GitPython==3.1.46
 idna==3.11
+iniconfig==2.3.0
 Jinja2==3.1.6
 jsonschema==4.26.0
 jsonschema-specifications==2025.9.1
@@ -18,9 +19,12 @@ packaging==26.0
 pandas==2.3.3
 pandas-stubs==2.3.3.260113
 pillow==12.1.1
+pluggy==1.6.0
 protobuf==6.33.6
 pyarrow==23.0.1
 pydeck==0.9.1
+Pygments==2.20.0
+pytest==9.1.1
 python-dateutil==2.9.0.post0
 pytz==2026.1.post1
 referencing==0.37.0

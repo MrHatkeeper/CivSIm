@@ -1,5 +1,6 @@
 import uuid
 from typing import TYPE_CHECKING
+
 from Civsim.City.Workplace.EResources import EResources
 from Civsim.Config import Config
 

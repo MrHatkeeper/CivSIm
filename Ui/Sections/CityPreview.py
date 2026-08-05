@@ -1,14 +1,14 @@
 import streamlit as st
 
 from Civsim.City.City import City
-from Ui.Sections.Population import renderPopulation
-from Ui.Sections.Housing import renderHousing
-from Ui.Sections.Happiness import renderHappiness
-from Ui.Sections.Hunger import renderHunger
-from Ui.Sections.Economy import renderResources
-from Ui.Sections.MayorOverview import renderMayor
-from Ui.Sections.Statistics import renderStatistics
 from Civsim.SaveManager.Saver import exportCity
+from Ui.Sections.Economy import renderResources
+from Ui.Sections.Happiness import renderHappiness
+from Ui.Sections.Housing import renderHousing
+from Ui.Sections.Hunger import renderHunger
+from Ui.Sections.MayorOverview import renderMayor
+from Ui.Sections.Population import renderPopulation
+from Ui.Sections.Statistics import renderStatistics
 
 
 def renderCityPreview(city: City):

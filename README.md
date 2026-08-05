@@ -25,6 +25,7 @@ sekcí.
     - `Misc/` - obsahuje pomocné funkce pro získávání dat.
     - `SaveManager/` - obsahuje kód pro načítání a ukládání historie města.
 - `Saves/` - složka pro uložené stavy měst.
+- `Tests/` - složka s testy pro projekt.
 - `Ui/` - vykreslování dat v uživatelském rozhraní.
     - `Sections/` - sekce pro vykreslení.
 - `main.py` - hlavní soubor, který slouží k zapnutí.

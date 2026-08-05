@@ -35,12 +35,10 @@ def getHighest(value: str, city: City):
     out = 0
     if value == 'happiness':
         for human in city.population:
-            if human.happiness > out:
-                out = human.happiness
+            out = max(out, human.happiness)
     elif value == 'hunger':
         for human in city.population:
-            if human.hunger > out:
-                out = human.hunger
+            out = max(out, human.hunger)
     else:
         raise ValueError("Nonexistent value")
     return out
@@ -57,13 +55,11 @@ def getLowest(value: str, city: City):
     if value == 'happiness':
         out = city.population[0].happiness
         for human in city.population:
-            if human.happiness < out:
-                out = human.happiness
+            out = min(out, human.happiness)
     elif value == 'hunger':
         out = city.population[0].hunger
         for human in city.population:
-            if human.hunger < out:
-                out = human.hunger
+            out = min(out, human.hunger)
     else:
         raise ValueError("Nonexistent value")
     return out

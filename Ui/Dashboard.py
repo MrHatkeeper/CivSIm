@@ -20,7 +20,7 @@ def renderDashboard(gm: GameMaster):
         " ",
         options=citiesToSelect.keys(),
         selection_mode="single",
-        default=list(citiesToSelect.keys())[0],
+        default=next(iter(citiesToSelect.keys())),
     )
 
     if selection is None:

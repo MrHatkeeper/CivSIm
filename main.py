@@ -1,8 +1,8 @@
 from time import sleep
 
-from Civsim.GameMaster import GameMaster
 import streamlit as st
 
+from Civsim.GameMaster import GameMaster
 from Ui.Dashboard import renderDashboard
 from Ui.SideBar import SideBar
 

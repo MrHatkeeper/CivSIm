@@ -87,7 +87,7 @@ def loadHistory(history: dict[str, list[str]]):
     :return: připravená historie k načtení
     """
     historyData = {}
-    for record in history.keys():
+    for record in history:
         if record not in historyData:
             historyData[record] = []
         for value in history[record]:

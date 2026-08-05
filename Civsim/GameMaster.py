@@ -28,7 +28,7 @@ class GameMaster:
         self.isRunning = True
         self.year = 0
         for i in range(numOfStartingCities):
-            city = City(i, 4, self)
+            city = City(i, 4, self.year)
             mayor = Mayor(city)
             city.mayor = mayor
             self.mayors.append(mayor)

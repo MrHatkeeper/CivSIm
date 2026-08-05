@@ -82,22 +82,19 @@ class Mayor:
             return self.city.buildSystem.canBuild("farmHouse")
         if action == "buildBrickHouse":
             return self.city.buildSystem.canBuild("brickHouse")
-        if action == "nothing":
-            return True
-        return False
+        return action == "nothing"
 
     def decision(self):
         """
         Funkce vyzkouší možné stavy, jak jaká akce ovlivní mésto. Následně vybere a udělá tu nejlepší.
         """
         bestValue = -inf
-        bestAction = list(self.actionValues.keys())[0]
-        for action in self.actionValues.keys():
+        bestAction = next(iter(self.actionValues.keys()))
+        for action in self.actionValues:
             startState = MockCity(self.city)
             evalValue = -1
-            if action != "nothing":
-                if self.canBuild(action):
-                    startState.mockAction(action)
+            if action != "nothing" and self.canBuild(action):
+                startState.mockAction(action)
             for lookAhead in range(Config.MAYOR_LOOK_AHEAD.value):
                 startState.updateMockCity()
 

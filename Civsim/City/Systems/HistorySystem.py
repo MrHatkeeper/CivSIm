@@ -5,7 +5,7 @@ import pandas as pd
 if TYPE_CHECKING:
     from Civsim.City.City import City
 
-from Civsim.Misc import PopInfo, Metrics
+from Civsim.Misc import Metrics, PopInfo
 
 
 class HistorySystem:

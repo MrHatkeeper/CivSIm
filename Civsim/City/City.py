@@ -25,13 +25,13 @@ class City:
     mayor: který model se o město stará
     """
 
-    def __init__(self, numOfCity: int, startPopulation: int, gm: GameMaster, mayor: Mayor = None):
+    def __init__(self, numOfCity: int, startPopulation: int, startYear: int, mayor: Mayor = None):
         self.name = f"City {numOfCity}"
         self.houses = []
         self.population = []
         self.workplaces = []
         self.storage = {EResources.FOOD: 0, EResources.BRICKS: 0}
-        self.year = gm.year
+        self.year = startYear
         self.peopleToKill = []
         self.populationSystem = PopulationSystem(self)
         self.housingSystem = HousingSystem(self)
@@ -58,7 +58,6 @@ class City:
         self.workplaces.append(Workplace(EResources.FOOD, self))
         self.workplaces.append(Workplace(EResources.BRICKS, self))
 
-        self.populationSystem.updatePopulation()
         self.workplaceSystem.assignWorkplace()
 
     def updateCity(self):
